@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Random Password Generator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        text-align: center;
+        margin: 50px;
+      }
+
+      h1 {
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 300px;
+        margin: 0 auto;
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 5px;
+      }
+
+      label,
+      input,
+      button {
+        margin-bottom: 10px;
+      }
+
+      input[type="number"] {
+        width: 100%;
+      }
+
+      button {
+        padding: 10px 20px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .password-result {
+        margin-top: 20px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Random Password Generator</h1>
+    <form onsubmit="return generatePassword()">
+      <label for="passwordLength">Password Length:</label>
+      <input
+        type="number"
+        id="passwordLength"
+        min="8"
+        max="32"
+        value="12"
+        required
+      />
+
+      <button type="submit">Generate Password</button>
+    </form>
+
+    <div class="password-result" id="passwordResult"></div>
+
+    <script>
+      function generateRandomPassword(length) {
+        const uppercaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowercaseChars = "abcdefghijklmnopqrstuvwxyz";
+        const numberChars = "0123456789";
+        const specialChars = "!@#$%^&*()-_=+[]{}|;:,.<>?";
+
+        const allChars =
+          uppercaseChars + lowercaseChars + numberChars + specialChars;
+        let password = "";
+
+        for (let i = 0; i < length; i++) {
+          const randomIndex = Math.floor(Math.random() * allChars.length);
+          password += allChars[randomIndex];
+        }
+
+        return password;
+      }
+
+      function generatePassword() {
+        const passwordLengthInput = document.getElementById("passwordLength");
+        const passwordLength = passwordLengthInput.value;
+        const password = generateRandomPassword(passwordLength);
+        const passwordResultDiv = document.getElementById("passwordResult");
+        passwordResultDiv.textContent = `Your random password is: ${password}`;
+        return false; // Prevent form submission
+        passwordLengthInput.value = "";
+      }
+    </script>
+  </body>
+</html>

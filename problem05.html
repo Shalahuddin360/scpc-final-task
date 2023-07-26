@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Simple Calculator</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      h1 {
+        text-align: center;
+      }
+
+      form {
+        max-width: 300px;
+        margin: 0 auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      input[type="number"],
+      select {
+        width: 100%;
+        padding: 5px;
+        margin-bottom: 10px;
+      }
+
+      input[type="submit"] {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      input[type="submit"]:hover {
+        background-color: #45a049;
+      }
+
+      p#result {
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Simple Calculator</h1>
+    <form id="calculatorForm">
+      <label for="num1">Enter the first number:</label>
+      <input type="number" id="num1" required />
+      <br />
+      <label for="num2">Enter the second number:</label>
+      <input type="number" id="num2" required />
+      <br />
+      <label for="operator">Choose an operator:</label>
+      <select id="operator" required>
+        <option value="">Select an operator</option>
+        <option value="+">+</option>
+        <option value="-">-</option>
+        <option value="*">*</option>
+        <option value="/">/</option>
+      </select>
+      <br />
+      <input type="submit" value="Calculate" />
+    </form>
+    <p id="result"></p>
+
+    <script>
+      document
+        .getElementById("calculatorForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          calculate();
+        });
+
+      function calculate() {
+        var num1 = parseFloat(document.getElementById("num1").value);
+        var num2 = parseFloat(document.getElementById("num2").value);
+        var operator = document.getElementById("operator").value;
+        var resultElement = document.getElementById("result");
+        var result;
+
+        if (isNaN(num1) || isNaN(num2) || operator === "") {
+          result = "Error: Please enter valid numbers and select an operator";
+        } else {
+          switch (operator) {
+            case "+":
+              result = num1 + num2;
+              break;
+            case "-":
+              result = num1 - num2;
+              break;
+            case "*":
+              result = num1 * num2;
+              break;
+            case "/":
+              if (num2 !== 0) {
+                result = num1 / num2;
+              } else {
+                result = "Error: Cannot divide by zero";
+              }
+              break;
+            default:
+              result = "Invalid operator";
+          }
+        }
+
+        resultElement.textContent = "Result: " + result;
+      }
+    </script>
+  </body>
+</html>

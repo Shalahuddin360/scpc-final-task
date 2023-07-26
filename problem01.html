@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Input Check and String Reversal</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        width: 400px;
+        margin: 0 auto;
+        padding: 20px 35px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      h1 {
+        font-size: 20px;
+      }
+      .input-field {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+      }
+
+      .output-field {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #f9f9f9;
+      }
+
+      .submit-btn {
+        display: block;
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <h1>Input Check and String Reversal</h1>
+        <label for="inputData">Enter an array or an object or a string:</label>
+        <input type="text" id="inputData" class="input-field" required />
+        <button
+          type="button"
+          class="submit-btn"
+          onclick="checkInputAndReverse()"
+        >
+          Submit
+        </button>
+        <label for="outputData">Reversed Output:</label>
+        <input type="text" id="outputData" class="output-field" readonly />
+      </form>
+    </div>
+
+    <script>
+      function reverseString(inputString) {
+        let reversedString = "";
+        for (let i = inputString.length - 1; i >= 0; i--) {
+          reversedString += inputString[i];
+        }
+        return reversedString;
+      }
+
+      function checkInputAndReverse() {
+        const inputElement = document.getElementById("inputData");
+        const outputElement = document.getElementById("outputData");
+        const userInput = inputElement.value.trim();
+
+        try {
+          const parsedInput = JSON.parse(userInput);
+
+          if (Array.isArray(parsedInput)) {
+            outputElement.value = "The input is an array.";
+          } else if (typeof parsedInput === "object" && parsedInput !== null) {
+            outputElement.value = "The input is an object.";
+          } else {
+            const reversedString = reverseString(userInput);
+            outputElement.value = reversedString;
+          }
+        } catch (error) {
+          const reversedString = reverseString(userInput);
+          outputElement.value = reversedString;
+        }
+
+        inputElement.value = "";
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Roman Numeral to Integer Conversion</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      h1 {
+        text-align: center;
+        font-size: 15px;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 10px;
+      }
+
+      input[type="text"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+      }
+
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4caf50;
+        color: #fff;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+
+      .result {
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>Roman Numeral to Integer Conversion</h1>
+      <form onsubmit="return false;">
+        <label for="romanNumeral">Enter Roman Numeral:</label>
+        <input
+          type="text"
+          id="romanNumeral"
+          placeholder="Enter Your Roman Numeral : IX or XXI"
+          required
+        />
+
+        <button onclick="convertRomanToInteger()">Convert</button>
+
+        <div class="result" id="result"></div>
+      </form>
+    </div>
+
+    <script>
+      function romanToInt(roman) {
+        const romanNumerals = {
+          I: 1,
+          V: 5,
+          X: 10,
+          L: 50,
+          C: 100,
+          D: 500,
+          M: 1000,
+        };
+
+        let total = 0;
+
+        for (let i = 0; i < roman.length; i++) {
+          const currentSymbolValue = romanNumerals[roman[i]];
+          const nextSymbolValue = romanNumerals[roman[i + 1]];
+
+          if (nextSymbolValue > currentSymbolValue) {
+            total += nextSymbolValue - currentSymbolValue;
+            i++; // Skip the next symbol as we have already processed it as part of the subtraction
+          } else {
+            total += currentSymbolValue;
+          }
+        }
+
+        return total;
+      }
+
+      function convertRomanToInteger() {
+        const romanNumeralInput = document.getElementById("romanNumeral");
+        const romanNumeral = romanNumeralInput.value;
+        const integerValue = romanToInt(romanNumeral);
+        document.getElementById(
+          "result"
+        ).innerText = `Integer Value: ${integerValue}`;
+
+        // Reset the input box after converting
+        romanNumeralInput.value = "";
+      }
+    </script>
+  </body>
+</html>
