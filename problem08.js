@@ -23,7 +23,7 @@ function findSecondSmallest(arr) {
   return secondSmallest;
 }
 
-// Test cases
+
 const secondSmallestNumber =findSecondSmallest([5, 3, 1, 4, 2])
 console.log("The Second Smallest Number Is :",secondSmallestNumber); 
 

@@ -22,7 +22,7 @@ function findMostFrequentElement(arr) {
   return mostFrequentElement;
 }
 
-// Example usage:
+
 const array = [3, 5, 2, 5, 3, 3, 1, 4, 5]; 
 const mostFrequent = findMostFrequentElement(array);
 console.log("Most frequent element:", mostFrequent); 
